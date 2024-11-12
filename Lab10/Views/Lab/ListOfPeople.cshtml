@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Laab10.Person>
+
+
+<h2>Список людей</h2>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info">@ViewBag.Message</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Прізвище</th>
+                <th>Ім'я</th>
+                <th>По батькові</th>
+                <th>Вік</th>
+                <th>Стать</th>
+                <th>Наявність роботи</th>
+                <th>Деталі</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model)
+            {
+                <tr>
+                    <td>@person.LastName</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.Patronymic</td>
+                    <td>@person.Age</td>
+                    <td>@person.Gender</td>
+                    <td>@(person.HasJob ? "Так" : "Ні")</td>
+                    <td>
+                        @Html.ActionLink("Переглянути", "PersonDetails", "Lab", new { personId = person.Id }, null)
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
